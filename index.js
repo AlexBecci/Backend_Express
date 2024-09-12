@@ -17,7 +17,12 @@ console.log('Server On Port 3000') */
 const express = require('express')
 
 const app = express()
-
+//procesar textos del body
+app.use(express.text())
+//procesar json del body
+app.use(express.json())
+//procesar urlcode
+app.use(express.urlencoded({ extended: false }))
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
@@ -32,9 +37,15 @@ app.get("/isAlive", (req, res) => {
     res.sendStatus(204)
 })
 
-app.get('/user', (req, res) => {
+app.get('/json', (req, res) => {
     res.json({ "name": "ALEX", lastname: "BECCI", age: 22, points: [1, 2, 3], adress: { city: 'New York', street: "AVENIDA123" } })
 })
+
+app.post('/user', (req, res) => {
+    console.log(req.body)
+    res.send("NUEVO USUARIO CREADO ")
+})
+
 /* app.get('/products', (req, res) => {
     res.send('Lista de productos')
 })
