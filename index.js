@@ -19,24 +19,41 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-    /* console.log(req) */
-    /*   res.sendFile('./static/index.html', {
-          root: __dirname
-      }) */
     res.send('Hello World')
 })
-
-app.get('/about', (req, res) => {
-    res.send('About')
+//consumiendo un archivo
+app.get('/miarchivo', (req, res) => {
+    res.sendFile('./image.png', {
+        root: __dirname
+    })
 })
 
-app.get('/weather', (req, res) => {
-    res.send('WHATER')
+app.get("/isAlive", (req, res) => {
+    res.sendStatus(204)
 })
 
-app.use((req, res) => {
-    res.status(404).send("PAGE NOT FOUND")
+app.get('/user', (req, res) => {
+    res.json({ "name": "ALEX", lastname: "BECCI", age: 22, points: [1, 2, 3], adress: { city: 'New York', street: "AVENIDA123" } })
 })
+/* app.get('/products', (req, res) => {
+    res.send('Lista de productos')
+})
+
+app.post('/products', (req, res) => {
+    res.send('Creando productos')
+})
+
+app.put('/products', (req, res) => {
+    res.send('ACtualizando un producto')
+})
+
+app.delete('/products', (req, res) => {
+    res.send('Eliminando un producto')
+})
+
+app.patch('/products', (req, res) => {
+    res.send('Actualizando parte del producto')
+}) */
 
 app.listen(3000)
 console.log('Server On Port 3000')
