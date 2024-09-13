@@ -1,3 +1,11 @@
+//procesar textos del body
+app.use(express.text())
+//procesar json del body
+app.use(express.json())
+//procesar urlcode
+app.use(express.urlencoded({ extended: false }))
+
+
 //consumiendo un archivo
 /* app.get('/miarchivo', (req, res) => {
     res.sendFile('./image.png', {

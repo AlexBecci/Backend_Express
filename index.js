@@ -17,23 +17,21 @@ console.log('Server On Port 3000') */
 const express = require('express')
 
 const app = express()
-//procesar textos del body
-app.use(express.text())
-//procesar json del body
-app.use(express.json())
-//procesar urlcode
-app.use(express.urlencoded({ extended: false }))
 
-
-//metodo all
-app.all('/info', (req, res) => {
-    res.send("SERVER INFO")
-})
-app.get('/', (req, res) => {
-    res.send('Hello World')
+//function que devuelva algo
+app.use((req, res, next) => {
+    console.log(`Route: ${req.url}, Metodo: ${req.method}`)
+    next()
 })
 
 
+//IMPLEMENTANDO MIDDLEWARES
+app.get('/profile', (req, res) => {
+    res.send('profile page')
+})
+app.get('/about', (req, res) => {
+    res.send('About Page')
+})
 
 app.listen(3000)
 console.log('Server On Port 3000')
