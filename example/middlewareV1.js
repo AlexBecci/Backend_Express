@@ -1,21 +1,32 @@
+//levantando servidor con node
 
+/* const http = require('http')
+
+const fs = require('fs')
+//leyendo la ruta 
+const server = http.createServer((req, res) => {
+    const read = fs.createReadStream('./static/index.html')
+    read.pipe(res)
+})
+
+server.listen(3000)
+
+console.log('Server On Port 3000') */
 
 //levantando el servidor con express
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
 
-//haciendo q mi projecto tome los json
-app.use(express.json())
-//implementando morgan
-app.use(morgan('dev'))
+//function que devuelva algo
+app.use((req, res, next) => {
+    console.log(`Route: ${req.url}, Metodo: ${req.method}`)
+
+    next()
+})
 
 app.get('/about', (req, res) => {
     res.send('About Page')
-})
-app.post('/profile',(req,res)=>{
-    console.log(req.body)
-    res.send('Profile Page')
 })
 
 //nuevo middleware
